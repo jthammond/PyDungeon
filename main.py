@@ -2,7 +2,7 @@ import dice
 import weapons
 import monsters
 
-    
+"""
 def attack(target, weapon):
     if target.Status['HP'] <=0:
         print "They're already dead!"
@@ -17,8 +17,9 @@ def attack(target, weapon):
                 return "You have slain the %s!" % (target)
         else:
             return "Missed! Enemy %s health left!" % (target.Status['HP'])
+"""
 
 
 #print attack(monsters.KOBALD, weapons.SWORD)
 
-print monsters.KOBALD.Status['HP']
+print monsters.KOBALD.__init__(KOBALD, Status)
