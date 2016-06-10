@@ -1,11 +1,15 @@
+
 class Enemy(object):
-        def __init__(self, AC, Status):
+        
+        def __init__(self, CR, AC, Status):
+                self.CR = CR
                 self.AC = AC
                 self.HP = Status['HP']
-                self.INTV = Status['Initiative']
-                
+                self.INIT = Status['Initiative']
 
-class KOBALD(Enemy):
+
+class KOBOLD(Enemy):
         def __init__(self):
-                AC = 15
-                Status = {'HP': 4, 'Initiative' : 8}
+                self.CR = 0.25
+                self.AC = 15
+                self.Status = {'HP': 4, 'Initiative' : 8}

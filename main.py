@@ -2,24 +2,32 @@ import dice
 import weapons
 import monsters
 
-"""
+
+KOBOLD = monsters.KOBOLD()
+enemy = monsters.Enemy(KOBOLD.CR, KOBOLD.AC, KOBOLD.Status )
+
+SWORD = weapons.SWORD()
+attk = weapons.MeleeWeapon(SWORD.dmg)
+
+
 def attack(target, weapon):
-    if target.Status['HP'] <=0:
+    if enemy.HP <=0:
         print "They're already dead!"
         
     else:
-        if target.Status['HP'] >= 0:
-            target.Status['HP'] = target.Status['HP'] - weapon.dmg_amount
-            if target.Status['HP'] > 0:
-                return "Hit! Enemy %s health left!" % (target.Status['HP'])
-                #return target.Status['HP']
+        if enemy.HP >= 0:
+            enemy.HP = enemy.HP - weapon.dmg
+            if enemy.HP > 0:
+                print "Hit! Enemy %s health left!" % (enemy.HP)
+                return enemy.HP
             else:
-                return "You have slain the %s!" % (target)
+                print "You have slain the %s!" % (target)
         else:
-            return "Missed! Enemy %s health left!" % (target.Status['HP'])
-"""
+            print "Missed! Enemy %s health left!" % (enemy.HP)
 
+def main():
+    attack(KOBOLD, SWORD)
+    
+    return
 
-#print attack(monsters.KOBALD, weapons.SWORD)
-
-print monsters.KOBALD.__init__(KOBALD, Status)
+main()
