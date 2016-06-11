@@ -5,34 +5,26 @@ import monsters
 import character
 
 player = character.Player('Uijoti')
-character = character.Character(player.Name, player.AC, player.Status)
+character = character.Character(player.Name, player.AC, player.Status, player.Lvl, player.Wield, player.RM)
 
 kobold = monsters.Kobold('Kobold1')
 enemy = monsters.Enemy(kobold.Name, kobold.CR, kobold.AC, kobold.Status )
 
-#melee_attk = weapons.Sword()
-sword = weapons.MeleeWeapon(weapons.Sword.dmg)
-
-staff = weapons.MeleeWeapon(weapons.Staff.dmg)
-
-magic_attk = spells.MagicMissle()
-missle = spells.MagicWeapon(magic_attk.dmg)
-
 
 def attack(target, character):
-    fumble = dice.d20()
-    roll = fumble + character.RM
-    if fumble == 1:
+    roll = dice.d20()
+    #roll = fumble + character.RM
+    if roll == 1:
         "You fumbled..."
     elif roll == 20:
-        damage = 2 * character.Weild.dmg
-        target.HP = enemy.HP - damage
+        damage = 2 * character.dmg
+        target.HP = target.HP - damage
         if enemy.HP > 0:
             print "CRITICAL HIT! nemy %s health left!" % (damage)
             return target.HP
     if roll >= target.AC:
-        damage = weapon.dmg
-        target.HP = enemy.HP - damage
+        damage = int(character.dmg)
+        target.HP = target.HP - damage
         if enemy.HP > 0:
             print "Hit! You dealt %s damage!" % (damage)
             return target.HP
