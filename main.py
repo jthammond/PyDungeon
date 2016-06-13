@@ -7,26 +7,32 @@ import character
 player = character.Player('Uijoti')
 character = character.Character(player.Name, player.AC, player.Status, player.Lvl, player.Wield, player.RM)
 
+#weapon = weapons.Weapon(weapons.Melee('Sword').Name, weapons.Melee('Sword').Dmg)  #<--- Path to follow for damage from weapons
+
+
 kobold = monsters.Kobold('Kobold1')
 enemy = monsters.Enemy(kobold.Name, kobold.CR, kobold.AC, kobold.Status )
 
 
 def attack(target, character):
-    roll = dice.d20()
-    #roll = fumble + character.RM
-    if roll == 1:
+    fumble = 1 #dice.d20()
+    #melee_weapon = weapons.Weapon(weapons.Melee(character.Wield).Name, weapons.Melee(character.Wield).Dmg)
+    #magic_weapon = weapons.Weapon(weapons.Magic(character.Wield).Name, weapons.Magic(character.Wield).Dmg)
+    roll = fumble + 5 # <-- character.RM
+    print "Fumble: " + str(fumble)
+    print "Roll: " + str(roll)
+    if fumble == 1:
         "You fumbled..."
+        return
     elif roll == 20:
-        damage = 2 * character.dmg
-        target.HP = target.HP - damage
-        if enemy.HP > 0:
-            print "CRITICAL HIT! nemy %s health left!" % (damage)
+        target.HP = target.HP - (2 * character.Dmg)
+        if target.HP > 0:
+            print "CRITICAL HIT! nemy %s health left!" % (target.HP)
             return target.HP
-    if roll >= target.AC:
-        damage = int(character.dmg)
-        target.HP = target.HP - damage
-        if enemy.HP > 0:
-            print "Hit! You dealt %s damage!" % (damage)
+    elif roll >= target.AC:
+        target.HP = target.HP - character.Dmg
+        if target.HP > 0:
+            print "Hit! You dealt %s damage!" % (character.Dmg)
             return target.HP
     else:
         print "Your attack missed!"
@@ -58,7 +64,8 @@ def battle(enemy, party):
             cmd = str(raw_input("COMMAND: "))
 
             if cmd == '1':
-                attack(enemy, character.Wield)
+                melee_weapon = weapons.Weapon(weapons.Melee(party.Wield).Name, weapons.Melee(party.Wield).Dmg)
+                attack(enemy, character)
                 if enemy.HP <= 0:
                     print "Congratulations, you have slain the enemy!"
                     return
@@ -66,6 +73,7 @@ def battle(enemy, party):
                     continue
 
             elif cmd == '2':
+                magic_weapon = weapons.Weapon(weapons.Magic(character.Wield).Name, weapons.Magic(character.Wield).Dmg)
                 attack(enemy, character.Magic)
                 if enemy.HP <= 0:
                     print "Congratulations, you have slain the enemy!"

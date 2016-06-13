@@ -2,9 +2,6 @@ import dice
 import weapons
 import spells
 
-sword = weapons.MeleeWeapon(weapons.Sword)
-staff = weapons.MeleeWeapon(weapons.Staff)
-missle = spells.MagicWeapon(spells.MagicMissle)
 
 class Character(object):
 
@@ -22,8 +19,8 @@ class Player(Character):
         def __init__(self, Name):
                 self.Name = 'Uijoti'
                 self.Lvl = 3
-                self.Wield = sword
-                self.AC = 15
+                self.Wield = 'Sword'
+                self.AC = 17
                 self.RM = 5 #Roll Modifier
                 self.Status = {'HP': 10, 'Initiative' : 12}
 
