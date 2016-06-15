@@ -18,5 +18,5 @@ def d12():
 def d20():
      return randrange(1,20)
      
-def dPERC():
+def d100():
     return randrange(1,100)

@@ -5,4 +5,3 @@ import dice
 class Spell(object):
     def __init__(self, Name, Dmg):
         self.Name = Name
-        self.Dmg = Dmg
