@@ -1,6 +1,9 @@
 import weapons
 import spells
 
+magic_missle = weapons.Magic(weapons.Magic_Missile().Name, weapons.Magic_Missile().Dmg, weapons.Magic_Missile().Lvl)
+fireball = weapons.Magic(weapons.Fireball().Name, weapons.Fireball().Dmg, weapons.Fireball().Lvl)
+
 class Player(object):
 
         def __init__(self, Name, Class, AC, Lvl, Wield, RM, Status, Spells):
@@ -22,7 +25,7 @@ class Uijoti(Player):
                 self.Wield = weapons.Sword
                 self.AC = 17
                 self.RM = 5 #Roll Modifier
-                self.Status = {'HP': 10, 'Initiative' : 5}
+                self.Status = {'HP': 15, 'Initiative' : 5}
                 self.Spells = []
 
 class Zetaphor(Player):
@@ -33,16 +36,6 @@ class Zetaphor(Player):
                 self.Lvl = 3
                 self.Wield = weapons.Staff
                 self.RM = 3 #Roll Modifier
-                self.Status = {'HP': 10, 'Initiative' : 4}
-                self.Spells = ['Magic_Missle', 'Fireball']
+                self.Status = {'HP': 15, 'Initiative' : 4}
+                self.Spells = [magic_missle, fireball]
                 
-class Nobody(Player):
-        def __init__(self):
-                self.Name = 'Nobody'
-                self.Class = 'Nothing'
-                self.AC = 0
-                self.Lvl = 0
-                self.Wield = weapons.Nothing
-                self.RM = 0 #Roll Modifier
-                self.Status = {'HP': 0, 'Initiative' : 0}
-                self.Spells = []

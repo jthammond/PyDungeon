@@ -1,32 +1,14 @@
 import dice
-import weapons
-import character
-import monsters
 import itertools
+import weapons
+import spells
+import characters
+import monsters
 
-uijoti = character.Player(character.Uijoti().Name, character.Uijoti().Class, character.Uijoti().AC, character.Uijoti().Lvl, character.Uijoti().Wield, character.Uijoti().RM, character.Uijoti().Status, character.Uijoti().Spells)
-kobold = monsters.Enemy(monsters.Kobold().Name, monsters.Kobold().CR, monsters.Kobold().AC, monsters.Kobold().Attack, monsters.Kobold().Status)
+uijoti = characters.Player(characters.Uijoti().Name, characters.Uijoti().Class, characters.Uijoti().AC, characters.Uijoti().Lvl, characters.Uijoti().Wield, characters.Uijoti().RM, characters.Uijoti().Status, characters.Uijoti().Spells)
+zetaphor = characters.Player(characters.Zetaphor().Name, characters.Zetaphor().Class, characters.Zetaphor().AC, characters.Zetaphor().Lvl, characters.Zetaphor().Wield, characters.Zetaphor().RM, characters.Zetaphor().Status, characters.Zetaphor().Spells)
+kobold = monsters.Enemy(monsters.Kobold().Name, monsters.Kobold().CR, monsters.Kobold().AC, monsters.Kobold().RM, monsters.Kobold().Wield, monsters.Kobold().AttackPerc, monsters.Kobold().Status)
 
+magic_missle = weapons.Magic(weapons.Magic_Missile().Name, weapons.Magic_Missile().Dmg, weapons.Magic_Missile().Lvl)
+fireball = weapons.Magic(weapons.Fireball().Name, weapons.Fireball().Dmg, weapons.Fireball().Lvl)
 
-def battle(enemy, character):
-    enemy_INIT = dice.d20() + enemy.INIT
-    character_INIT = dice.d20() + character.INIT
-    #battle_pool = [enemy, character]
-    print "enemy_INIT = " + str(enemy_INIT)
-    print "party_INIT = " + str(character_INIT)
-
-    if character_INIT >= enemy_INIT:
-        print "CHARACTER FIRST"
-        battle_pool = [character, enemy]
-        #for i in itertools.cycle(battle_pool[1:]):
-        for i in itertools.cycle(battle_pool):
-            print i
-
-    if enemy_INIT >= character_INIT:
-        print "ENEMY FIRST"
-        battle_pool = [enemy, character]
-        #for i in itertools.cycle(battle_pool[0:]):
-        for i in itertools.cycle(battle_pool):
-                print i
-
-battle(kobold, uijoti)

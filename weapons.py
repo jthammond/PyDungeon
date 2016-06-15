@@ -11,10 +11,10 @@ class Magic(object):
         self.Dmg = Dmg
         self.Lvl = Lvl
         
-class Nothing(Melee):
+class Fists(Melee):
     def __init__(self):
-        self.Name = 'Nothing'
-        self.Dmg = 'NOBODY DAMAGE'
+        self.Name = 'Fists'
+        self.Dmg = dice.d4()
 
 class Staff(Melee):
     def __init__(self):
@@ -36,4 +36,4 @@ class Fireball(Magic):
     def __init__(self):
         self.Name = 'Fireball'
         self.Dmg = dice.d6()
-        self.Lvl = 1
+        self.Lvl = 2

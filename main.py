@@ -1,114 +1,157 @@
 import dice
-#import weapons
-#import spells
+import itertools
+import weapons
+import spells
+import characters
 import monsters
-import character
 
-uijoti = character.Player(character.Uijoti().Name, character.Uijoti().Class, character.Uijoti().AC, character.Uijoti().Lvl, character.Uijoti().Wield, character.Uijoti().RM, character.Uijoti().Status, character.Uijoti().Spells)
-kobold = monsters.Enemy(monsters.Kobold().Name, monsters.Kobold().CR, monsters.Kobold().AC, monsters.Kobold().Attack, monsters.Kobold().Status)
+uijoti = characters.Player(characters.Uijoti().Name, characters.Uijoti().Class, characters.Uijoti().AC, characters.Uijoti().Lvl, characters.Uijoti().Wield, characters.Uijoti().RM, characters.Uijoti().Status, characters.Uijoti().Spells)
+zetaphor = characters.Player(characters.Zetaphor().Name, characters.Zetaphor().Class, characters.Zetaphor().AC, characters.Zetaphor().Lvl, characters.Zetaphor().Wield, characters.Zetaphor().RM, characters.Zetaphor().Status, characters.Zetaphor().Spells)
+kobold = monsters.Enemy(monsters.Kobold().Name, monsters.Kobold().CR, monsters.Kobold().AC, monsters.Kobold().RM, monsters.Kobold().Wield, monsters.Kobold().AttackPerc, monsters.Kobold().Status)
 
 
-def attack(target, character):
-    fumble = dice.d20()
-    roll = fumble + character.INIT() # <-- character.RM
-    damage = character.Wield().Dmg
-    print "Fumble: " + str(fumble)
-    print "Roll: " + str(roll)
-    if fumble == 1:
-        print "You fumbled..."
+def attack(target, attacker):
+    nat_roll = dice.d20()
+    roll = nat_roll + attacker.RM  # <-- roll modifier
+    damage = attacker.Wield().Dmg
+    if nat_roll == 1:
+        print "%s fumbled..." % (attacker.Name)
         return
-    elif roll == 20:
+    elif nat_roll == 20:
         target.HP = target.HP - (2 * damage)
         if target.HP > 0:
-            print "CRITICAL HIT! nemy %s health left!" % (target.HP)
+            print "CRITICAL HIT! %s dealt %s damage!" % (attacker.Name, damage)
             return target.HP
     elif roll >= target.AC:
         target.HP = target.HP - damage
         if target.HP > 0:
-            print "Hit! You dealt %s damage!" % (damage)
+            print "Hit! %s dealt %s damage!" % (attacker.Name, damage)
             return target.HP
     else:
-        print "Your attack missed!"
+        print "%s's attack missed!" % (attacker.Name)
+        return
+    
+
+def magic_attack(target, attacker, spell):
+    nat_roll = dice.d20()
+    roll = nat_roll + attacker.RM  # <-- roll modifier
+    damage = spell.Dmg
+    if nat_roll == 1:
+        print "%s fumbled..." % (attacker.Name)
+        return
+    elif nat_roll == 20:
+        target.HP = target.HP - (2 * damage)
+        if target.HP > 0:
+            print "CRITICAL HIT! %s's %s dealt %s damage!" % (attacker.Name, spell.Name, damage)
+            return target.HP
+    elif roll >= target.AC:
+        target.HP = target.HP - damage
+        if target.HP > 0:
+            print "Hit! %s's %s dealt %s damage!" % (attacker.Name, spell.Name, damage)
+            return target.HP
+    else:
+        print "%s's %s missed!" % (attacker.Name, spell.Name)
         return
 
 
 def battle(enemy, character):
-#------------------------------------------------------------------
-    print "You can 1: FIGHT or 2: RUN!"
-    command = str(raw_input("COMMAND: "))
-    if command == '1':
-        while enemy.HP and character.HP > 0:
-#--------------INITIATIVE SYSTEM--------------------
-            """combat_pool = {}
-            for i in enemies:
-                combat_pool[i] = i.INIT
-            for i in party:
-                combat_pool[i] = i.INIT"""
-#----------------------------------------------------
-            atk_commands = ['1 : Melee Attack',
-                            '2 : Magic Attack',
-                            '3 : Use Item',
-                            '4 : Hold']
-            print atk_commands
+    
+#___________________VVV Initiative System VVV_______________________________
+    enemy_INIT = dice.d20() + enemy.INIT
+    character_INIT = dice.d20() + character.INIT
 
-            cmd = str(raw_input("COMMAND: "))
+    battle_pool = []
 
-            if cmd == '1':
-                attack(enemy, character)
-                if enemy.HP <= 0:
-                    print "Congratulations, you have slain the enemy!"
-                    if enemy.HP and character.HP > 0:
-                        continue
-                    else:
+    if character_INIT >= enemy_INIT:
+        print "%s gets first strike!" % (character.Name.upper())
+        battle_pool = [character, enemy]
+    if enemy_INIT > character_INIT:
+        print "%s gets the jump on you!" % (enemy.Name.upper())
+        battle_pool = [enemy, character]
+#___________________^^^ Initiative System ^^^____________________________
+    
+    while enemy.HP and character.HP > 0:
+        
+        for x in battle_pool:
+            attacker = x
+            defender = battle_pool[1]
+            
+            if isinstance(x, characters.Player):
+                atk_commands = ['1 : Melee Attack',
+                                '2 : Magic Attack',
+                                '3 : Use Item',
+                                '4 : Hold']
+                print atk_commands
+                cmd = str(raw_input("COMMAND: "))
+                if cmd == '1':
+                    attack(defender, attacker)
+                    print "Enemy has %s health" % (enemy.HP)
+                    print "You have %s health" % (character.HP)
+                    if enemy.HP <= 0:
+                        print "Congratulations, you have slain the enemy!"
                         return
-                else:
-                    continue
-
-            elif cmd == '2':
-                #atk_spell = character.Wield
-                attack(enemy, character)
-                if enemy.HP <= 0:
-                    print "Congratulations, you have slain the enemy!"
-                    if enemy.HP and character.HP > 0:
-                        continue
-                    else:
+                    elif character.HP <= 0:
+                        print "You have been slain..."
                         return
+                    else:
+                        battle_pool = [battle_pool[1], x]
+                        continue
+                elif cmd == '2':
+                    if character.Spells == []:
+                        print "You don't have any spells!"
+                        print atk_commands
+                        #return
+                    else:
+                        spell_book =[]
+                        option = 1
+                        for i in character.Spells:
+                            spell_book.append(str(option) + " : " + i.Name)
+                            option += 1
+                        print spell_book
+                        choice = int(raw_input('Choose Spell: ')) - 1
+                        spell = character.Spells[choice]
+                        magic_attack(defender, attacker, spell)
+                        print "Enemy has %s health" % (enemy.HP)
+                        print "You have %s health" % (character.HP)
+                        if enemy.HP <= 0:
+                            print "Congratulations, you have slain the enemy!"
+                            return
+                        elif character.HP <= 0:
+                            print "You have been slain..."
+                            return
+                        else:
+                            battle_pool = [battle_pool[1], x]
+                            continue
+                elif cmd == '3':
+                    print "This isn't in the game yet"
+                    print atk_commands
+                    #continue
+                elif cmd == '4':
+                    print "You scuttle away with your tail between your legs..."
+                    return
                 else:
-                    continue
-
-            elif cmd == '3':
-                print "This isn't in the game yet"
-                continue
-
-            elif cmd == '4':
-                print "You hold the line!"
-                continue
+                    print "INVALID COMMAND"
+                    print atk_commands
+                    #continue
+                
+            elif isinstance(x, monsters.Enemy):
+                    attack(defender, attacker)
+                    print "Enemy has %s health" % (enemy.HP)
+                    print "You have %s health" % (character.HP)
+                    if enemy.HP <= 0:
+                        print "Congratulations, you have slain the enemy!"
+                        return
+                    elif character.HP <= 0:
+                        print "You have been slain..."
+                        return
+                    else:
+                        battle_pool = [battle_pool[1], x]
+                        continue
             else:
-                print "Invalid command. Please try again."
-                continue
+                print "Something went wrong, time for a beer..."
+                break
+            
 
-        else:
-            if character.HP > enemy.HP:
-                print "Congratulations, you have slain the enemy party!"
-                return
-
-            elif enemy.HP > character.HP:
-                print "Your skills were no match for the enemies. You have been eliminated"
-                return
-
-            else:
-                print "I don't know what just happened. Time for beer."
-                return
-
-    elif command == '2':
-        print "You scuttle away with your tail between your legs..."
-        return
-
-    else:
-        print "Invalid command. Please try again."
-        return
-
-    return
 
 
 def main():
