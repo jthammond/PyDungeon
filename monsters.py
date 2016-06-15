@@ -20,7 +20,7 @@ class Kobold(Enemy):
                 self.RM = 1
                 self.Wield = weapons.Fists
                 self.AttackPerc = 85
-                self.Status = {'HP': 1, 'Initiative' : 1}
+                self.Status = {'HP': 8, 'Initiative' : 1}
 
 class Rat(Enemy):
         def __init__(self):
