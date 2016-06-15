@@ -37,3 +37,6 @@ class Fireball(Magic):
         self.Name = 'Fireball'
         self.Dmg = dice.d6()
         self.Lvl = 2
+        
+magic_missle = Magic(Magic_Missile().Name, Magic_Missile().Dmg, Magic_Missile().Lvl)
+fireball = Magic(Fireball().Name, Fireball().Dmg, Fireball().Lvl)

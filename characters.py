@@ -1,8 +1,6 @@
 import weapons
 import spells
 
-magic_missle = weapons.Magic(weapons.Magic_Missile().Name, weapons.Magic_Missile().Dmg, weapons.Magic_Missile().Lvl)
-fireball = weapons.Magic(weapons.Fireball().Name, weapons.Fireball().Dmg, weapons.Fireball().Lvl)
 
 class Player(object):
 
@@ -37,5 +35,7 @@ class Zetaphor(Player):
                 self.Wield = weapons.Staff
                 self.RM = 3 #Roll Modifier
                 self.Status = {'HP': 15, 'Initiative' : 4}
-                self.Spells = [magic_missle, fireball]
+                self.Spells = [weapons.magic_missle, weapons.fireball]
                 
+uijoti = Player(Uijoti().Name, Uijoti().Class, Uijoti().AC, Uijoti().Lvl, Uijoti().Wield, Uijoti().RM, Uijoti().Status, Uijoti().Spells)
+zetaphor = Player(Zetaphor().Name, Zetaphor().Class, Zetaphor().AC, Zetaphor().Lvl, Zetaphor().Wield, Zetaphor().RM, Zetaphor().Status, Zetaphor().Spells)

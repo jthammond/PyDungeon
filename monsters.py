@@ -29,3 +29,5 @@ class Rat(Enemy):
                 self.AC = 12
                 self.AttackPerc = 8
                 self.Status = {'HP': 5, 'Initiative' : 2}
+                
+kobold = Enemy(Kobold().Name, Kobold().CR, Kobold().AC, Kobold().RM, Kobold().Wield, Kobold().AttackPerc, Kobold().Status)
