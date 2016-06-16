@@ -31,3 +31,4 @@ class Rat(Enemy):
                 self.Status = {'HP': 5, 'Initiative' : 2}
                 
 kobold = Enemy(Kobold().Name, Kobold().CR, Kobold().AC, Kobold().RM, Kobold().Wield, Kobold().AttackPerc, Kobold().Status)
+rat = Enemy(Rat().Name, Rat().CR, Rat().AC, Rat().RM, Rat().Wield, Rat().AttackPerc, Rat().Status)
