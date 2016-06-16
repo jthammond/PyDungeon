@@ -7,10 +7,10 @@ class Player(object):
         def __init__(self, Name, Class, AC, Lvl, Wield, RM, Status, Spells):
                 self.Name = Name
                 self.Class = Class
-                self.AC = AC
+                self.AC = AC #Armor Class
                 self.Lvl = Lvl
                 self.Wield = Wield
-                self.RM = RM
+                self.RM = RM #Roll Modifier
                 self.HP = Status['HP']
                 self.INIT = Status['Initiative']
                 self.Spells = Spells
@@ -22,7 +22,7 @@ class Uijoti(Player):
                 self.Lvl = 3
                 self.Wield = weapons.Sword
                 self.AC = 17
-                self.RM = 5 #Roll Modifier
+                self.RM = 5
                 self.Status = {'HP': 15, 'Initiative' : 5}
                 self.Spells = []
 
@@ -33,7 +33,7 @@ class Zetaphor(Player):
                 self.AC = 15
                 self.Lvl = 3
                 self.Wield = weapons.Staff
-                self.RM = 3 #Roll Modifier
+                self.RM = 3
                 self.Status = {'HP': 15, 'Initiative' : 4}
                 self.Spells = [weapons.magic_missle, weapons.fireball]
                 

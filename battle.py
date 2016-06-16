@@ -2,7 +2,7 @@ import dice
 import characters
 import monsters
 
-#_____________________________Enumerate and Print List__________________________________
+#_____________________________Print Enumerated List__________________________________
 def PRINT_LIST(list):
     print(' '.join('{}: {}'.format(*i) for i in enumerate(list, 1),))
     
@@ -18,8 +18,8 @@ def atk_commands(defender, attacker):
         ATTACK(defender, attacker, 'melee')
         
     elif cmd == '2':
-            ATTACK(defender, attacker, 'magic')
-            
+        ATTACK(defender, attacker, 'magic')
+    
     elif cmd == '3':
         print "This isn't in the game yet"
         return
@@ -34,6 +34,7 @@ def atk_commands(defender, attacker):
 def ATTACK(target, attacker, type):
     nat_roll = dice.d20()
     roll = nat_roll + attacker.RM  # <-- roll modifier
+    
     #finds type of attack and assigns damage accordingly
     if type == 'melee':
         damage = attacker.Wield().Dmg
@@ -43,6 +44,7 @@ def ATTACK(target, attacker, type):
             print "You search for a spell, but don't have any! Enemy %s gets the jump!" % (target.Name)
             return
         else:
+            #Choosing spell
             spell_book = []
             for i in attacker.Spells:
                 spell_book.append(i.Name)
@@ -51,7 +53,18 @@ def ATTACK(target, attacker, type):
             
             choice = int(raw_input('Choose Spell: ')) - 1
             spell = attacker.Spells[choice]
-            damage = spell.Dmg
+            
+            #Checking for damage multiplier
+            if spell.Mtplr == 'YES':
+                print "Damage roll = " + str(spell.Dmg)
+                print "Attacker level = " + str(attacker.Lvl)
+                damage = attacker.Lvl * spell.Dmg
+                
+            elif spell.Mtplr == 'NO':
+                damage = spell.Dmg
+                
+            else:
+                print 'Something went wrong.'
     
     else:
         print "That's not a weapon!"
@@ -63,14 +76,12 @@ def ATTACK(target, attacker, type):
         return
     elif nat_roll == 20:
         target.HP = target.HP - (2 * damage)
-        if target.HP > 0:
-            print "CRITICAL HIT! %s dealt %s damage!" % (attacker.Name, damage)
-            return target.HP
+        print "CRITICAL HIT! %s dealt %s damage!" % (attacker.Name, damage)
+        return target.HP
     elif roll >= target.AC:
         target.HP = target.HP - damage
-        if target.HP > 0:
-            print "Hit! %s dealt %s damage!" % (attacker.Name, damage)
-            return target.HP
+        print "Hit! %s dealt %s damage!" % (attacker.Name, damage)
+        return target.HP
     else:
         print "%s's attack missed!" % (attacker.Name)
         return
@@ -93,27 +104,29 @@ def BATTLE(enemy, character):
 
     #Loop to the death!    
     while enemy.HP and character.HP > 0:
-        for x in battle_pool:
-            attacker = x
-            defender = battle_pool[1]
-            
-            if isinstance(attacker, characters.Player):
-                atk_commands(defender, attacker)
-                battle_pool = [defender, attacker]
-                continue
-                
-            elif isinstance(attacker, monsters.Enemy):
-                ATTACK(defender, attacker, 'melee')
-                battle_pool = [defender, attacker]
-                continue
-                    
-            else:
-                print "Something went wrong, time for a beer..."
-                break
-    else:
+        
         if enemy.HP <= 0:
             print "You have slain the enemy!"
             return
         elif character.HP <= 0:
             print "You have been slain..."
             return
+        else:
+            for x in battle_pool:
+                attacker = x
+                defender = battle_pool[1]
+                
+                if isinstance(attacker, characters.Player):
+                    atk_commands(defender, attacker)
+                    battle_pool = [defender, attacker]
+                    continue
+                    
+                elif isinstance(attacker, monsters.Enemy):
+                    ATTACK(defender, attacker, 'melee')
+                    battle_pool = [defender, attacker]
+                    continue
+                        
+                else:
+                    print "Something went wrong, time for a beer..."
+                    break
+
