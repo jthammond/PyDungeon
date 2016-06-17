@@ -21,7 +21,7 @@ def atk_commands(defender, attacker):
         ATTACK(defender, attacker, 'magic')
     
     elif cmd == '3':
-        print "This isn't in the game yet"
+        print "This isn't in the game yet, but it looks like %s is getting ready to take a swing!" % (defender)
         return
     
     elif cmd == '4':

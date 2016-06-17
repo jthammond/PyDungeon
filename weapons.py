@@ -1,5 +1,4 @@
 import dice
-import characters
 
 class Melee(object):
     def __init__(self, Name, Dmg):
