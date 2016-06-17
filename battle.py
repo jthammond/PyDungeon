@@ -55,12 +55,12 @@ def ATTACK(target, attacker, type):
             spell = attacker.Spells[choice]
 
             #Checking for damage multiplier
-            if spell.Mtplr == 'YES':
+            if spell.Mtplr:
                 print "Damage roll = " + str(spell.Dmg)
                 print "Attacker level = " + str(attacker.Lvl)
                 damage = attacker.Lvl * spell.Dmg
 
-            elif spell.Mtplr == 'NO':
+            elif not spell.Mtplr:
                 damage = spell.Dmg
 
             else:
