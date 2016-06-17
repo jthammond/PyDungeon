@@ -1,5 +1,8 @@
 from random import randrange
 
+def diceRoll(max, min=1):
+    return randrange(min, max)
+
 def d4():
      return randrange(1,4)
      
