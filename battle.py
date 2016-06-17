@@ -3,14 +3,14 @@ import characters
 import monsters
 
 #_____________________________Print Enumerated List__________________________________
-def PRINT_LIST(list):
-    print ' '.join('{}: {}'.format(*i) for i in enumerate(list, 1),)
+def PRINT_LIST(display):
+    print ' '.join('{}: {}'.format(*i) for i in enumerate(display, 1),)
 
 #______________________________User Input for Combat___________________________________
 def atk_commands(defender, attacker):
-    atk_commands = ['Melee Attack', 'Magic Attack', 'Use Item', 'Hold']
+    atk_choices = ['Melee Attack', 'Magic Attack', 'Use Item', 'Hold']
 
-    PRINT_LIST(atk_commands)
+    PRINT_LIST(atk_choices)
 
     cmd = str(raw_input("BATTLE: "))
 
@@ -21,25 +21,25 @@ def atk_commands(defender, attacker):
         ATTACK(defender, attacker, 'magic')
 
     elif cmd == '3':
-        print "This isn't in the game yet, but it looks like %s is getting ready to take a swing!" % (defender)
+        print "This isn't in the game yet, but it looks like %s is getting ready to take a swing!" % (defender.Name)
         return
 
     elif cmd == '4':
-        print "You scuttle away with your tail between your legs..."
+        print "You hold the line!"
         return
     else:
         print "INVALID COMMAND"
 
 #____________________________________Attack_____________________________________________
-def ATTACK(target, attacker, type):
+def ATTACK(target, attacker, atk_type):
     nat_roll = dice.d20()
     roll = nat_roll + attacker.RM  # <-- roll modifier
 
-    #finds type of attack and assigns damage accordingly
-    if type == 'melee':
+    #finds atk_type of attack and assigns damage accordingly
+    if atk_type == 'melee':
         damage = attacker.Wield().Dmg
 
-    elif type == 'magic':
+    elif atk_type == 'magic':
         if attacker.Spells == []:
             print "You search for a spell, but don't have any! Enemy %s gets the jump!" % (target.Name)
             return
@@ -56,8 +56,6 @@ def ATTACK(target, attacker, type):
 
             #Checking for damage multiplier
             if spell.Mtplr:
-                print "Damage roll = " + str(spell.Dmg)
-                print "Attacker level = " + str(attacker.Lvl)
                 damage = attacker.Lvl * spell.Dmg
 
             elif not spell.Mtplr:

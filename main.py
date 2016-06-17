@@ -1,4 +1,5 @@
 import characters
+import monsters
 import battle
 import world_map
 
@@ -11,7 +12,7 @@ def look():
     return
 
 #___________________________________Command__________________________________________
-def command():
+def user_input():
     command = raw_input('COMMAND: ').upper()
 
     if command == 'LOOK':
@@ -36,7 +37,7 @@ def command():
         return character.Loc
     elif command == 'FIGHT':
         target = raw_input('WHO? ')
-        battle(target, character)
+        battle.BATTLE(target, character)
         return
     else:
         print "INVALID COMMAND"
@@ -44,10 +45,14 @@ def command():
 
 #___________________________________Main__________________________________________
 def main():
-    playing = True
+    """playing = True
 
     while playing == True:
         look()
-        command()
+        user_input()"""
+
+
 
 main()
+
+battle.BATTLE(monsters.kobold, characters.zetaphor)
