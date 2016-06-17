@@ -7,13 +7,13 @@ character = characters.uijoti
 #___________________________________Look__________________________________________
 def look():
     print map.Tutorial[character.Loc[0]][character.Loc[1]]
-    print character.Loc 
+    print character.Loc
     return
 
 #___________________________________Command__________________________________________
 def command():
     command = raw_input('COMMAND: ').upper()
-    
+
     if command == 'LOOK':
         print command
         look()
@@ -45,7 +45,7 @@ def command():
 #___________________________________Main__________________________________________
 def main():
     playing = True
-    
+
     while playing == True:
         look()
         command()
