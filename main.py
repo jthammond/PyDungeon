@@ -18,19 +18,19 @@ def command():
         print command
         look()
         return
-    elif command == 'N' or 'NORTH':
+    elif command == 'N' or command == 'NORTH':
         print command
         character.Loc = [character.Loc[0] - 1, character.Loc[1]]
         return character.Loc
-    elif command == 'S' or 'SOUTH':
+    elif command == 'S' or command == 'SOUTH':
         print command
         character.Loc = [character.Loc[0] + 1, character.Loc[1]]
         return character.Loc
-    elif command == 'E' or 'EAST':
+    elif command == 'E' or command == 'EAST':
         print command
         character.Loc = [character.Loc[0], character.Loc[1] + 1]
         return character.Loc
-    elif command == 'W' or 'WEST':
+    elif command == 'W' or command == 'WEST':
         print command
         character.Loc = [character.Loc[0], character.Loc[1] - 1]
         return character.Loc
