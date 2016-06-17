@@ -1,12 +1,12 @@
 import characters
 import battle
-import map
+import world_map
 
 character = characters.uijoti
 
 #___________________________________Look__________________________________________
 def look():
-    print map.Tutorial[character.Loc[0]][character.Loc[1]]
+    print world_map.Tutorial[character.Loc[0]][character.Loc[1]]
     print character.Loc
     return
 
