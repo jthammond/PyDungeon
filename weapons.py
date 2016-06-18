@@ -11,7 +11,7 @@ class Magic(object):
         self.Mtplr = Mtplr #Flags if there is damage multiplyer
         self.Dmg = Dmg
         self.Lvl = Lvl
-        
+
 class Fists(Melee):
     def __init__(self):
         self.Name = 'Fists'
@@ -30,16 +30,16 @@ class Sword(Melee):
 class Magic_Missile(Magic):
     def __init__(self):
         self.Name = 'Magic Missile'
-        self.Mtplr = 'YES'
+        self.Mtplr = True
         self.Dmg = dice.d4()
         self.Lvl = 1
 
 class Fireball(Magic):
     def __init__(self):
         self.Name = 'Fireball'
-        self.Mtplr = 'YES'
+        self.Mtplr = True
         self.Dmg = dice.d6()
         self.Lvl = 2
-        
+
 magic_missle = Magic(Magic_Missile().Name, Magic_Missile().Mtplr, Magic_Missile().Dmg, Magic_Missile().Lvl)
 fireball = Magic(Fireball().Name, Fireball().Mtplr, Fireball().Dmg, Fireball().Lvl)

@@ -1,0 +1,12 @@
+{
+    "Uijoti": {
+        "Class": "Rogue",
+        "Loc": [3, 5],
+        "Lvl": 3,
+        "Wield": "Sword",
+        "AC": 17,
+        "RM": 5,
+        "Status": {"HP": 15, "Initiative": 5},
+        "Spells": []
+    }
+}

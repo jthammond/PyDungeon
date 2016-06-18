@@ -1,0 +1,13 @@
+{
+    "I_BAR": {
+        "Name": "Inn Bar",
+        "Exits": ["North", "South", "East", "West"],
+        "Description": "an empty bar with a few tables at the side. The bartender looks pissed."
+    },
+
+    "T_SQUARE": {
+        "Name": "Town Square",
+        "Exits": ["North", "South", "East", "West"],
+        "Description": "this is a description of the town square."
+    }
+}
