@@ -7,8 +7,9 @@ character = characters.uijoti
 
 #___________________________________Look__________________________________________
 def look():
-    print world_map.Tutorial[character.Loc[0]][character.Loc[1]]
-    print character.Loc
+    location = (world_map.Tutorial[character.Loc[0]][character.Loc[1]])
+    print "You are at the %s, %s" % (location['Name'], location['Description'])
+    # print character.Loc
     return
 
 #___________________________________Command__________________________________________
@@ -45,14 +46,15 @@ def user_input():
 
 #___________________________________Main__________________________________________
 def main():
-    """playing = True
+    playing = True
 
     while playing == True:
         look()
-        user_input()"""
+        user_input()
 
 
 
 main()
 
-battle.BATTLE(monsters.kobold, characters.zetaphor)
+
+#battle.BATTLE(monsters.kobold, characters.zetaphor)
