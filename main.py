@@ -8,7 +8,7 @@ character = characters.uijoti
 #___________________________________Look__________________________________________
 def look():
     location = (world_map.Tutorial[character.Loc[0]][character.Loc[1]])
-    print "You are at the %s, %s" % (location['Name'], location['Description'])
+    print "You are at the %s, %s. There are exits to the %s" % (location['Name'], location['Description'], ', '.join(location['Exits']))
     # print character.Loc
     return
 
