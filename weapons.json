@@ -1,0 +1,29 @@
+{
+    "Melee": {
+        "Fists": {
+            "Dmg": "d4"
+        },
+
+        "Staff": {
+            "Dmg": "d4"
+        },
+
+        "Sword": {
+            "Dmg": "d6"
+        }
+    },
+
+    "Magic": {
+        "Magic Missle": {
+            "Dmg": "d4",
+            "Mtplr": true,
+            "Lvl": 1
+        },
+
+        "Fireball": {
+            "Dmg": "d6",
+            "Mtplr": true,
+            "Lvl": 2
+        }
+    }
+}
