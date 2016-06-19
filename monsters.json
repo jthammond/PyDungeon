@@ -1,0 +1,25 @@
+{
+    "Kobold": {
+        "CR": 0.025,
+        "AC": 14,
+        "RM": 1,
+        "Wield": "Fists",
+        "AttackPerc": 85,
+        "Status": {
+            "HP": 8,
+            "Initiative": 1
+        }
+    },
+
+    "Rat": {
+        "CR": 0.025,
+        "AC": 10,
+        "RM": 0,
+        "Wield": "Fists",
+        "AttackPerc": 8,
+        "Status": {
+            "HP": 4,
+            "Initiative": 2
+        }
+    }
+}
