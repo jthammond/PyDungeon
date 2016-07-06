@@ -1,4 +1,10 @@
 {
+    "WALL": {
+        "Name": "WALL",
+        "Exits": [""],
+        "Description": "WALL"
+    },
+    
     "T_STABLES": {
         "Name": "Town Stables",
         "Exits": ["South"],
