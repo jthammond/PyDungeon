@@ -1,13 +1,229 @@
 {
+    "WALL": {
+        "Name": "WALL",
+        "Exits": [""],
+        "Description": "WALL"
+    },
+    
+    "T_STABLES": {
+        "Name": "Town Stables",
+        "Exits": ["South"],
+        "Description": "a fenced in area with a shack for the horses... Where are the horses?"
+    },
+
+    "T_MAYOR": {
+        "Name": "Town Mayor's House",
+        "Exits": ["North"],
+        "Description": "a comfortable one room house with the fireplace lit."
+    },
+
+    "T_GRAVEYARD": {
+        "Name": "Town Graveyard",
+        "Exits": ["North", "South"],
+        "Description": "a typical boring graveyard. Wait, what was that?"
+    },
+
+    "T_GATES": {
+        "Name": "Town Gates",
+        "Exits": ["West"],
+        "Description": "a road leading to the monsterous wooden gates keeping wildlings out of town. And townsfolk in for that matter."
+    },
+
+    "SW_TREASURE": {
+        "Name": "Sewer",
+        "Exits": ["East"],
+        "Description": "a collapsed sewer tunnel with a chest in the rubble."
+    },
+
+    "S_TRAIN": {
+        "Name": "Sorcerer's Training Room",
+        "Exits": ["North", "East"],
+        "Description": "a large room that contains shelves of scrolls. there is also an openening in the wall to what appears to be outside."
+    },
+
+    "S_ROOM": {
+        "Name": "Bedroom",
+        "Exits": ["South"],
+        "Description": "a small room with only a chest and a bed."
+    },
+    
+    "SW_QI": {
+        "Name": "Sewer",
+        "Exits": ["West"],
+        "Description": "a collapsed sewer tunnel with a chest in the rubble."
+    },
+    
+    "SW_PUZZLE": {
+        "Name": "Sewer",
+        "Exits": ["North", "South"],
+        "Description": "a sewer tunnel"
+    },
+
+    "SW_MONSTER": {
+        "Name": "Sewer",
+        "Exits": ["North", "South"],
+        "Description": "a sewer tunnel"
+    },
+
+    "SW_LOCKED": {
+        "Name": "Sewer",
+        "Exits": ["North", "South"],
+        "Description": "the sewer tunnel is blocked by a gate."
+    },
+
+    "S_LIB": {
+        "Name": "Sorcerer's Library",
+        "Exits": ["North", "West"],
+        "Description": "shelves stocked with books line all of the walls with a table and chairs in the middle."
+    },
+
+    "S_GUILD": {
+        "Name": "Sorcerer's Guild",
+        "Exits": ["North", "South"],
+        "Description": "the entry for the guild."
+    },
+
+    "SW_BOSS": {
+        "Name": "Sewer",
+        "Exits": ["North", "East", "West"],
+        "Description": "a crossing in the sewer with a large grate slowly letting out it's contents. You just pretend it's water."
+    },
+
+    "ROAD4": {
+        "Name": "Road",
+        "Exits": ["North", "South"],
+        "Description": "a dirt road."
+    },
+
+    "ROAD3": {
+        "Name": "Road",
+        "Exits": ["North", "South", "East", "West"],
+        "Description": "a dirt road."
+    },
+
+    "ROAD2": {
+        "Name": "Road",
+        "Exits": ["South", "East", "West"],
+        "Description": "a dirt road."
+    },
+
+    "ROAD1": {
+        "Name": "Road",
+        "Exits": ["North", "South", "East", "West"],
+        "Description": "a dirt road."
+    },
+
+    "R_TRAIN": {
+        "Name": "Rogue Training Room",
+        "Exits": ["North", "South", "East"],
+        "Description": "a mannequin wearing a jacket covered in bells sits in the middle of the room."
+    },
+
+    "R_ROOM": {
+        "Name": "Bedroom",
+        "Exits": ["North"],
+        "Description": "a small room with only a chest and a bed."
+    },
+
+    "R_HALL": {
+        "Name": "Rogue Hall",
+        "Exits": ["South"],
+        "Description": "a small, dark conference room with no decorations. Just a table and some chairs."
+    },
+
+    "R_GUILD": {
+        "Name": "Rogue Guild",
+        "Exits": ["East", "West"],
+        "Description": "the entry for the guild."
+    },
+
+    "I_KITCHEN": {
+        "Name": "Inn Kitchen",
+        "Exits": ["South"],
+        "Description": "several brick ovens are lit, eminating the smell of delicious food"
+    },
+
+    "I_HALL": {
+        "Name": "Inn Meeting Hall",
+        "Exits": ["North", "West"],
+        "Description": "a large dining table sits in this intricately decorated room."
+    },
+
+    "F_ROOM": {
+        "Name": "Bedroom",
+        "Exits": ["North"],
+        "Description": "a small room with only a chest and a bed."
+    },
+
+    "F_GUILD": {
+        "Name": "Fighter's Guild",
+        "Exits": ["North", "South"],
+        "Description": "the entry for the guild."
+    },
+
+    "F_DOJO": {
+        "Name": "Fighter's Dojo",
+        "Exits": ["South", "West"],
+        "Description": "a large mat is in the center of the room. Two guild members are sparring with wooden swords."
+    },
+
+    "F_ARMORY": {
+        "Name": "Fighter's Armory",
+        "Exits": ["South", "East"],
+        "Description": "there are racks of weapons and armor filling this room."
+    },
+
+    "C_TRAIN": {
+        "Name": "Cleric's Training Room",
+        "Exits": ["North", "South"],
+        "Description": "members of the guild work to remedy ailments of townsfold, there are a few cots and some seating."
+    },
+
+    "C_STAGE": {
+        "Name": "Church Stage",
+        "Exits": ["North", "East"],
+        "Description": "a large stage equipped with a podium. You don't recognize the religious symbol attached to the front."
+    },
+
+    "C_ROOM": {
+        "Name": "Bedroom",
+        "Exits": ["South"],
+        "Description": "a small room with only a chest and a bed."
+    },
+
+    "C_PEWS": {
+        "Name": "Church Pews",
+        "Exits": ["North", "South"],
+        "Description": "rows of pews sit on either side of you."
+    },
+
+    "C_GUILD": {
+        "Name": "Cleric's Guild",
+        "Exits": ["North", "South"],
+        "Description": "the entry for the guild."
+    },
+
+    "C_CONF": {
+        "Name": "Cleric's Conference Room",
+        "Exits": ["North", "West"],
+        "Description": "a room containing a large table with many chairs around it. Scrolls and vials filled with random liquids are scattered on the table."
+    },
+
+    "I_SHOP": {
+        "Name": "Inn Shop",
+        "Exits": ["South"],
+        "Description": "an elderly lady sits behind a counter. Behind her you see various wares."
+    },
+
     "I_BAR": {
         "Name": "Inn Bar",
-        "Exits": ["North", "South", "East", "West"],
+        "Exits": ["North", "South", "East"],
         "Description": "an empty bar with a few tables at the side. The bartender looks pissed."
     },
 
     "T_SQUARE": {
         "Name": "Town Square",
         "Exits": ["North", "South", "East", "West"],
-        "Description": "this is a description of the town square."
+        "Description": "a large tree stands in the middle of the square with a small platform to the north."
     }
 }

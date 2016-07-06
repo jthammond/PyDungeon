@@ -1,27 +1,22 @@
-import dice
+import actions
 import characters
-import monsters
-
-#_____________________________Print Enumerated List__________________________________
-def PRINT_LIST(display):
-    print ' '.join('{}: {}'.format(*i) for i in enumerate(display, 1),)
 
 #______________________________User Input for Combat___________________________________
 def atk_commands(defender, attacker):
     atk_choices = ['Melee Attack', 'Magic Attack', 'Use Item', 'Hold']
 
-    PRINT_LIST(atk_choices)
+    actions.PRINT_LIST(atk_choices)
 
     cmd = str(raw_input("BATTLE: "))
 
     if cmd == '1':
-        ATTACK(defender, attacker, 'melee')
+        ATTACK(defender, attacker, "Melee")
 
     elif cmd == '2':
-        ATTACK(defender, attacker, 'magic')
+        ATTACK(defender, attacker, "Magic")
 
     elif cmd == '3':
-        print "This isn't in the game yet, but it looks like %s is getting ready to take a swing!" % (defender.Name)
+        print "This isn't in the game yet, but it looks like %s is getting ready to take a swing!" % (defender["Name"])
         return
 
     elif cmd == '4':
@@ -32,34 +27,34 @@ def atk_commands(defender, attacker):
 
 #____________________________________Attack_____________________________________________
 def ATTACK(target, attacker, atk_type):
-    nat_roll = dice.d20()
-    roll = nat_roll + attacker.RM  # <-- roll modifier
+    nat_roll = actions.ROLL("d20")
+    roll = nat_roll + attacker["RM"]  # <-- roll modifier
 
     #finds atk_type of attack and assigns damage accordingly
-    if atk_type == 'melee':
-        damage = attacker.Wield().Dmg
+    if atk_type == "Melee":
+        damage = actions.ROLL(characters.weapon["Melee"][attacker["Wield"]]["Dmg"])
 
-    elif atk_type == 'magic':
-        if attacker.Spells == []:
-            print "You search for a spell, but don't have any! Enemy %s gets the jump!" % (target.Name)
+    elif atk_type == "Magic":
+        if attacker["Spells"] == []:
+            print "You search for a spell, but don't have any! Enemy %s gets the jump!" % (target["Name"])
             return
         else:
             #Choosing spell
             spell_book = []
-            for i in attacker.Spells:
-                spell_book.append(i.Name)
+            for i in attacker["Spells"]:
+                spell_book.append(i)
 
-            PRINT_LIST(spell_book)
+            actions.PRINT_LIST(spell_book)
 
             choice = int(raw_input('Choose Spell: ')) - 1
-            spell = attacker.Spells[choice]
+            spell = attacker["Spells"][choice]
 
             #Checking for damage multiplier
-            if spell.Mtplr:
-                damage = attacker.Lvl * spell.Dmg
+            if characters.weapon["Magic"][spell]["Mtplr"]:
+                damage = attacker["Lvl"] * actions.ROLL(characters.weapon["Magic"][spell]["Dmg"])
 
-            elif not spell.Mtplr:
-                damage = spell.Dmg
+            elif not characters.weapon["Magic"][spell]["Mtplr"]:
+                damage = actions.ROLL(characters.weapon["Magic"][spell]["Dmg"])
 
             else:
                 print 'Something went wrong.'
@@ -70,43 +65,43 @@ def ATTACK(target, attacker, atk_type):
 
     #Rolls to hit/crit/fumble and dealing damage to target
     if nat_roll == 1:
-        print "%s fumbled..." % (attacker.Name)
+        print "%s fumbled..." % (attacker["Name"])
         return
     elif nat_roll == 20:
-        target.HP = target.HP - (2 * damage)
-        print "CRITICAL HIT! %s dealt %s damage!" % (attacker.Name, damage)
-        return target.HP
-    elif roll >= target.AC:
-        target.HP = target.HP - damage
-        print "Hit! %s dealt %s damage!" % (attacker.Name, damage)
-        return target.HP
+        target["Status"]["HP"] = target["Status"]["HP"] - (2 * damage)
+        print "CRITICAL HIT! %s dealt %s damage!" % (attacker["Name"], damage)
+        return target["Status"]["HP"]
+    elif roll >= target["AC"]:
+        target["Status"]["HP"] = target["Status"]["HP"] - damage
+        print "Hit! %s dealt %s damage!" % (attacker["Name"], damage)
+        return target["Status"]["HP"]
     else:
-        print "%s's attack missed!" % (attacker.Name)
+        print "%s's attack missed!" % (attacker["Name"])
         return
 
 #____________________________________Battle_____________________________________________
 def BATTLE(enemy, character):
 
-    enemy_INIT = dice.d20() + enemy.INIT
-    character_INIT = dice.d20() + character.INIT
+    enemy_INIT = actions.ROLL("d20") + enemy["Status"]["INIT"]
+    character_INIT = actions.ROLL("d20") + character["Status"]["INIT"]
 
     battle_pool = []
 
     #Roll initiative and assign to battle_pool
     if character_INIT >= enemy_INIT:
-        print "%s gets first strike!" % (character.Name)
+        print "%s gets first strike!" % (character["Name"])
         battle_pool = [character, enemy]
     elif enemy_INIT > character_INIT:
-        print "%s gets the jump on you!" % (enemy.Name)
+        print "%s gets the jump on you!" % (enemy["Name"])
         battle_pool = [enemy, character]
 
     #Loop to the death!
-    while enemy.HP and character.HP > 0:
+    while enemy["Status"]["HP"] and character["Status"]["HP"] > 0:
 
-        if enemy.HP <= 0:
+        if enemy["Status"]["HP"] <= 0:
             print "You have slain the enemy!"
             return
-        elif character.HP <= 0:
+        elif character["Status"]["HP"] <= 0:
             print "You have been slain..."
             return
         else:
@@ -114,13 +109,14 @@ def BATTLE(enemy, character):
                 attacker = x
                 defender = battle_pool[1]
 
-                if isinstance(attacker, characters.Player):
+                if attacker == character:
                     atk_commands(defender, attacker)
                     battle_pool = [defender, attacker]
                     continue
 
-                elif isinstance(attacker, monsters.Enemy):
-                    ATTACK(defender, attacker, 'melee')
+                elif attacker == enemy:
+                    ATTACK(defender, attacker, "Melee")
+                    print "You have %s health left!" % str(character["Status"]["HP"])
                     battle_pool = [defender, attacker]
                     continue
 

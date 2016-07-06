@@ -1,12 +1,25 @@
 {
     "Uijoti": {
+        "Name": "Uijoti",
         "Class": "Rogue",
         "Loc": [3, 5],
         "Lvl": 3,
         "Wield": "Sword",
         "AC": 17,
         "RM": 5,
-        "Status": {"HP": 15, "Initiative": 5},
+        "Status": {"HP": 15, "INIT": 5},
         "Spells": []
+    },
+
+    "Zetaphor": {
+        "Name": "Zetaphor",
+        "Class": "Sorcerer",
+        "Loc": [3, 5],
+        "Lvl": 3,
+        "Wield": "Staff",
+        "AC": 15,
+        "RM": 3,
+        "Status": {"HP": 15, "INIT": 5},
+        "Spells": ["Magic Missle", "Fireball"]
     }
 }

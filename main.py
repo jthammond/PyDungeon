@@ -1,44 +1,41 @@
+import actions
 import characters
-import monsters
-import battle
-import world_map
 
-character = characters.uijoti
-
-#___________________________________Look__________________________________________
-def look():
-    location = (world_map.Tutorial[character.Loc[0]][character.Loc[1]])
-    print "You are at the %s, %s. There are exits to the %s" % (location['Name'], location['Description'], ', '.join(location['Exits']))
-    # print character.Loc
-    return
+#_____________________________For Testing__________________________________
+enemy = characters.npc['Kobold']
+character = characters.player['Uijoti']
 
 #___________________________________Command__________________________________________
-def user_input():
+def command():
+    command_list = ['Look', 'Help', 'North or N', 'East or E', 'South or S', 'West or W', 'Fight']
     command = raw_input('COMMAND: ').upper()
 
     if command == 'LOOK':
-        print command
-        look()
+        actions.look()
         return
-    elif command == 'N' or command == 'NORTH':
-        print command
-        character.Loc = [character.Loc[0] - 1, character.Loc[1]]
-        return character.Loc
-    elif command == 'S' or command == 'SOUTH':
-        print command
-        character.Loc = [character.Loc[0] + 1, character.Loc[1]]
-        return character.Loc
-    elif command == 'E' or command == 'EAST':
-        print command
-        character.Loc = [character.Loc[0], character.Loc[1] + 1]
-        return character.Loc
-    elif command == 'W' or command == 'WEST':
-        print command
-        character.Loc = [character.Loc[0], character.Loc[1] - 1]
-        return character.Loc
-    elif command == 'FIGHT':
-        target = raw_input('WHO? ')
-        battle.BATTLE(target, character)
+    if command == 'HELP':
+        print "The commands are:"
+        actions.PRINT_LIST(command_list)
+        return
+    if command == 'N' or command == 'NORTH':
+        actions.move("North")
+        actions.look()
+        return
+    if command == 'S' or command ==  'SOUTH':
+        actions.move("South")
+        actions.look()
+        return
+    if command == 'E' or command ==  'EAST':
+        actions.move("East")
+        actions.look()
+        return
+    if command == 'W' or command ==  'WEST':
+        actions.move("West")
+        actions.look()
+        return
+    if command == 'FIGHT':
+        #target = raw_input('WHO? ')
+        actions.FIGHT(enemy, character)
         return
     else:
         print "INVALID COMMAND"
@@ -46,15 +43,13 @@ def user_input():
 
 #___________________________________Main__________________________________________
 def main():
+    
     playing = True
-
+    
+    actions.look()
+    
     while playing == True:
-        look()
-        user_input()
-
+        command()
 
 
 main()
-
-
-#battle.BATTLE(monsters.kobold, characters.zetaphor)
