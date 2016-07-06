@@ -6,14 +6,20 @@ character = characters.uijoti
 
 #___________________________________Look__________________________________________
 def look():
+    exits = []
     room = world_map.Tutorial[character.Loc[0]][character.Loc[1]]['Name']
     desc = world_map.Tutorial[character.Loc[0]][character.Loc[1]]['Description']
-    print "You are at the %s, %s" % (room, desc)
+    x = world_map.Tutorial[character.Loc[0]][character.Loc[1]]['Exits']
+    for i in x:
+        exits.append(i)
+    
+    print "You are at the %s, %s There" % (room, desc)
+    print "There are exits to your %s" % (exits)
     return
 
 #___________________________________Move__________________________________________
 def move(dir):
-    exits = desc = world_map.Tutorial[character.Loc[0]][character.Loc[1]]['Exits']
+    exits = world_map.Tutorial[character.Loc[0]][character.Loc[1]]['Exits']
     if dir in exits:
         if dir == "North":
             character.Loc = [character.Loc[0] - 1, character.Loc[1]]
