@@ -1,6 +1,6 @@
 import json, os
 
-with open(os.path.dirname(os.path.realpath(__file__)) + '/room.json') as room_file:
+with open(os.path.dirname(os.path.realpath(__file__)) + '/rooms.json') as room_file:
     room = json.load(room_file)
 
 Tutorial = {1:  {1: room['WALL'], 2:room['WALL'],    3:room['WALL'],     4:room['WALL'],    5:room['WALL'],     6:room['WALL'],        7:room['WALL'],        8:room['WALL'],    9:room['WALL']}, # 1
