@@ -1,17 +1,13 @@
 import json, os
 from random import randrange
-import characters
+import tools
 import world_map
+import characters
 import battle
 
 #_____________________________For Testing__________________________________
 enemy = characters.npc['Kobold']
 character = characters.player['Uijoti']
-
-#_____________________________Print Enumerated List__________________________________
-def PRINT_LIST(display):
-    print ' '.join('{}: {}'.format(*i) for i in enumerate(display, 1),)
-    return
     
 #_____________________________Battle__________________________________
 def FIGHT(enemy, character):
@@ -41,27 +37,26 @@ def ROLL(dice):
     
     if dice == "d100":
         return randrange(1, 100)
-        
 
 #___________________________________Look__________________________________________
-def look():
+def LOOK():
     
     room = world_map.Tutorial[character["Loc"][0]][character["Loc"][1]]['Name']
     desc = world_map.Tutorial[character["Loc"][0]][character["Loc"][1]]['Description']
     exitList = world_map.Tutorial[character["Loc"][0]][character["Loc"][1]]['Exits']
-    first = exitList[0:(len(exitList)-1)]
-    last = exitList[(len(exitList)-1):]
-
+    
+    tools.CLEAR_SCREEN()
     print "You are at the %s, %s" % (room, desc)
     if len(exitList) == 1:
         print "There are exits to your %s" % "".join(exitList)
         return
     else:
-        print "There are exits to your %s, and %s" % (", ".join(first), "".join(last))
+        print "There are exits to your",
+        tools.PRINT_LIST(exitList),
         return
 
 #___________________________________Move__________________________________________
-def move(dir):
+def MOVE(dir):
     exits = world_map.Tutorial[character["Loc"][0]][character["Loc"][1]]['Exits']
     if dir in exits:
         if dir == "North":

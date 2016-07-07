@@ -1,11 +1,12 @@
-import actions
+import tools
 import characters
+import actions
 
 #______________________________User Input for Combat___________________________________
 def atk_commands(defender, attacker):
     atk_choices = ['Melee Attack', 'Magic Attack', 'Use Item', 'Hold']
 
-    actions.PRINT_LIST(atk_choices)
+    tools.ENUM_LIST(atk_choices)
 
     cmd = str(raw_input("BATTLE: "))
 
@@ -44,7 +45,7 @@ def ATTACK(target, attacker, atk_type):
             for i in attacker["Spells"]:
                 spell_book.append(i)
 
-            actions.PRINT_LIST(spell_book)
+            tools.ENUM_LIST(spell_book)
 
             choice = int(raw_input('Choose Spell: ')) - 1
             spell = attacker["Spells"][choice]
@@ -97,7 +98,7 @@ def BATTLE(enemy, character):
 
     #Loop to the death!
     while enemy["Status"]["HP"] and character["Status"]["HP"] > 0:
-
+        tools.CLEAR_SCREEN()
         if enemy["Status"]["HP"] <= 0:
             print "You have slain the enemy!"
             return

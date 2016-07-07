@@ -1,4 +1,5 @@
 import actions
+import tools
 import characters
 
 #_____________________________For Testing__________________________________
@@ -6,50 +7,64 @@ enemy = characters.npc['Kobold']
 character = characters.player['Uijoti']
 
 #___________________________________Command__________________________________________
-def command():
-    command_list = ['Look', 'Help', 'North or N', 'East or E', 'South or S', 'West or W', 'Fight']
-    command = raw_input('COMMAND: ').upper()
+def command(raw_command):
+
+    command_list = ['Look', 'Help', 'North or N', 'East or E', 'South or S', 'West or W', 'Fight', 'Quit']
+    command = str(raw_command)
 
     if command == 'LOOK':
-        actions.look()
+        actions.LOOK()
         return
+    
     if command == 'HELP':
+        tools.CLEAR_SCREEN()
         print "The commands are:"
-        actions.PRINT_LIST(command_list)
+        tools.PRINT_LIST(command_list)
         return
+    
     if command == 'N' or command == 'NORTH':
-        actions.move("North")
-        actions.look()
+        actions.MOVE("North")
+        actions.LOOK()
         return
+
     if command == 'S' or command ==  'SOUTH':
-        actions.move("South")
-        actions.look()
+        actions.MOVE("South")
+        actions.LOOK()
         return
+
     if command == 'E' or command ==  'EAST':
-        actions.move("East")
-        actions.look()
+        actions.MOVE("East")
+        actions.LOOK()
         return
+
     if command == 'W' or command ==  'WEST':
-        actions.move("West")
-        actions.look()
+        actions.MOVE("West")
+        actions.LOOK()
         return
+
     if command == 'FIGHT':
-        #target = raw_input('WHO? ')
+        tools.CLEAR_SCREEN()
         actions.FIGHT(enemy, character)
         return
+
+    #if command == 'QUIT':
+    #    return False
+
     else:
+        tools.CLEAR_SCREEN()
         print "INVALID COMMAND"
         return
 
 #___________________________________Main__________________________________________
 def main():
     
-    playing = True
-    
-    actions.look()
-    
-    while playing == True:
-        command()
+    while True:
+        usr_input = raw_input('CMD: ').upper()
+        if usr_input == 'QUIT':
+            break
+        else:
+            command(usr_input)
+        
 
 
 main()
