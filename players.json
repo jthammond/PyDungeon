@@ -11,7 +11,7 @@
         "Spells": [],
         "Inventory":{"Gold": 5000,
                     "Potion": 5,
-                    "Key": ["Inn_Key", "R_Key"]
+                    "Key": ["R_Key"]
         }
     },
 
@@ -24,6 +24,10 @@
         "AC": 15,
         "RM": 3,
         "Status": {"HP": 15, "INIT": 5},
-        "Spells": ["Magic Missle", "Fireball"]
+        "Spells": ["Magic Missle", "Fireball"],
+        "Inventory":{"Gold": 5000,
+                    "Potion": 5,
+                    "Key": ["S_Key"]
+        }
     }
 }

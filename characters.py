@@ -12,6 +12,3 @@ with open(os.path.dirname(os.path.realpath(__file__)) + '/npc.json') as npc_file
 with open(os.path.dirname(os.path.realpath(__file__)) + '/weapons.json') as weapon_file:
     weapon = json.load(weapon_file)
     
-character = player['Uijoti']
-
-print character["Inventory"]["Key"]

@@ -40,9 +40,10 @@ def ROLL(dice):
 
 #___________________________________Get Room Name__________________________________________
 
-def GET_ROOM(dir):
+def GET_ROOM():
     name = world_map.Tutorial[character["Loc"][0]][character["Loc"][1]]["Name"]
     print name
+
 
 #___________________________________Look__________________________________________
 def LOOK():
