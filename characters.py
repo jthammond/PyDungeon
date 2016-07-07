@@ -11,3 +11,4 @@ with open(os.path.dirname(os.path.realpath(__file__)) + '/npc.json') as npc_file
 #_____________________________Load Weapon__________________________________
 with open(os.path.dirname(os.path.realpath(__file__)) + '/weapons.json') as weapon_file:
     weapon = json.load(weapon_file)
+    

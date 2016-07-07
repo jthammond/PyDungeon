@@ -58,7 +58,13 @@ def LOOK():
 #___________________________________Move__________________________________________
 def MOVE(dir):
     exits = world_map.Tutorial[character["Loc"][0]][character["Loc"][1]]['Exits']
-    if dir in exits:
+    locked = world_map.Tutorial[character["Loc"][0]][character["Loc"][1]]['Lock']
+    door_key = world_map.Tutorial[character["Loc"][0]][character["Loc"][1]]['Key']
+    
+    if dir not in exits:
+        print "There's not an exit in that direction."
+        return
+    else:
         if dir == "North":
             character["Loc"] = [character["Loc"][0] - 1, character["Loc"][1]]
             return character["Loc"]
@@ -71,10 +77,6 @@ def MOVE(dir):
         if dir == "West":
             character["Loc"] = [character["Loc"][0], character["Loc"][1] - 1]
             return character["Loc"]
-        else:
-            print "That's not a direction."
-            return
-    else:
-        print "There's not an exit in that direction."
-        return
+
+
     return

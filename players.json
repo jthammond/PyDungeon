@@ -8,7 +8,11 @@
         "AC": 17,
         "RM": 5,
         "Status": {"HP": 15, "INIT": 5},
-        "Spells": []
+        "Spells": [],
+        "Inventory":{"Gold": 5000,
+                    "Potion": 5,
+                    "Sewer_Key": 1
+        }
     },
 
     "Zetaphor": {
