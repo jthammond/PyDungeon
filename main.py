@@ -8,10 +8,10 @@ enemy = characters.npc['Kobold']
 character = characters.player['Uijoti']
 
 #___________________________________Command__________________________________________
-def command(raw_command):
+def command(usr_input):
 
     command_list = ['Look', 'Help', 'Inventory', 'Fight', 'North or N', 'East or E', 'South or S', 'West or W', 'Quit']
-    command = str(raw_command)
+    command = str(usr_input)
 
     if command == 'LOOK':
         actions.LOOK()
@@ -34,32 +34,33 @@ def command(raw_command):
         return
     
     if command == 'N' or command == 'NORTH':
+        tools.CLEAR_SCREEN()
         actions.MOVE("North")
-        actions.LOOK()
+        actions.GET_ROOM(character["Loc"])
         return
 
     if command == 'S' or command ==  'SOUTH':
+        tools.CLEAR_SCREEN()
         actions.MOVE("South")
-        actions.LOOK()
+        actions.GET_ROOM(character["Loc"])
         return
 
     if command == 'E' or command ==  'EAST':
+        tools.CLEAR_SCREEN()
         actions.MOVE("East")
-        actions.LOOK()
+        actions.GET_ROOM(character["Loc"])
         return
 
     if command == 'W' or command ==  'WEST':
+        tools.CLEAR_SCREEN()
         actions.MOVE("West")
-        actions.LOOK()
+        actions.GET_ROOM(character["Loc"])
         return
 
     if command == 'FIGHT':
         tools.CLEAR_SCREEN()
         actions.FIGHT(enemy, character)
         return
-
-    #if command == 'QUIT':
-    #    return False
 
     else:
         tools.CLEAR_SCREEN()
@@ -84,12 +85,12 @@ def main():
     print "You wake up to a large crash, hazy and confused. LOOK around, maybe get some HELP."
       
     while True:
-        usr_input = raw_input('CMD: ').upper()
+        raw_command = raw_input('CMD: ').upper()
         
-        if usr_input == 'QUIT':
+        if raw_command == 'QUIT':
             break
         else:
-            command(usr_input)
+            command(raw_command)
         
         
 

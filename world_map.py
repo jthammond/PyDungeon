@@ -3,7 +3,7 @@ import json, os
 with open(os.path.dirname(os.path.realpath(__file__)) + '/rooms.json') as room_file:
     room = json.load(room_file)
 
-Tutorial = {1:  {1: room['WALL'], 2:room['WALL'],    3:room['WALL'],     4:room['WALL'],    5:room['WALL'],     6:room['WALL'],        7:room['WALL'],        8:room['WALL'],    9:room['WALL']}, # 1
+Tutorial = {1:  {1:room['WALL'],  2:room['WALL'],    3:room['WALL'],     4:room['WALL'],    5:room['WALL'],     6:room['WALL'],        7:room['WALL'],        8:room['WALL'],    9:room['WALL']}, # 1
             2:  {1:room['WALL'],  2:room['WALL'],    3:room['F_ARMORY'], 4:room['F_DOJO'],  5:room['I_SHOP'],   6:room['I_KITCHEN'],   7:room['WALL'],        8:room['WALL'],    9:room['WALL']}, # 2
             3:  {1:room['WALL'],  2:room['R_HALL'],  3:room['R_ROOM'],   4:room['F_GUILD'], 5:room['I_BAR'],    6:room['I_HALL'],      7:room['T_STABLES'],   8:room['WALL'],    9:room['WALL']}, # 3
             4:  {1:room['WALL'],  2:room['R_TRAIN'], 3:room['R_GUILD'],  4:room['ROAD1'],   5:room['T_SQUARE'], 6:room['ROAD2'],       7:room['ROAD3'],       8:room['T_GATES'], 9:room['WALL']}, # 4

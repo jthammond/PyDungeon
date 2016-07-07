@@ -38,12 +38,18 @@ def ROLL(dice):
     if dice == "d100":
         return randrange(1, 100)
 
+#___________________________________Get Room Name__________________________________________
+
+def GET_ROOM(dir):
+    name = world_map.Tutorial[character["Loc"][0]][character["Loc"][1]]["Name"]
+    print name
+
 #___________________________________Look__________________________________________
 def LOOK():
     
-    room = world_map.Tutorial[character["Loc"][0]][character["Loc"][1]]['Name']
-    desc = world_map.Tutorial[character["Loc"][0]][character["Loc"][1]]['Description']
-    exitList = world_map.Tutorial[character["Loc"][0]][character["Loc"][1]]['Exits']
+    room = world_map.Tutorial[character["Loc"][0]][character["Loc"][1]]["Name"]
+    desc = world_map.Tutorial[character["Loc"][0]][character["Loc"][1]]["Description"]
+    exitList = world_map.Tutorial[character["Loc"][0]][character["Loc"][1]]["Exits"]
     
     tools.CLEAR_SCREEN()
     print "You are at the %s, %s" % (room, desc)
@@ -57,26 +63,45 @@ def LOOK():
 
 #___________________________________Move__________________________________________
 def MOVE(dir):
-    exits = world_map.Tutorial[character["Loc"][0]][character["Loc"][1]]['Exits']
-    locked = world_map.Tutorial[character["Loc"][0]][character["Loc"][1]]['Lock']
-    door_key = world_map.Tutorial[character["Loc"][0]][character["Loc"][1]]['Key']
+    x = character["Loc"][0]
+    y = character["Loc"][1]
+    exits = world_map.Tutorial[x][y]["Exits"]
+   
+    def key_check(x, y):
+        doorKey = world_map.Tutorial[x][y]["Key"]
+        if doorKey == "":
+            character["Loc"] = [x, y]
+            return character["Loc"]
+        else:
+            if doorKey not in character["Inventory"]["Key"]:
+                tools.CLEAR_SCREEN()
+                print "You can't go that direction yet. Maybe you need a key?"
+                return
+            else:
+                character["Loc"] = [x, y]
+                return character["Loc"] 
+ 
     
     if dir not in exits:
+        tools.CLEAR_SCREEN()
         print "There's not an exit in that direction."
         return
     else:
         if dir == "North":
-            character["Loc"] = [character["Loc"][0] - 1, character["Loc"][1]]
-            return character["Loc"]
+            x = x - 1
+            key_check(x, y)
+            
         if dir == "South":
-            character["Loc"] = [character["Loc"][0] + 1, character["Loc"][1]]
-            return character["Loc"]
+            x = x + 1
+            key_check(x, y)
+
         if dir == "East":
-            character["Loc"] = [character["Loc"][0], character["Loc"][1] + 1]
-            return character["Loc"]
+            y = y + 1
+            key_check(x, y)
+
         if dir == "West":
-            character["Loc"] = [character["Loc"][0], character["Loc"][1] - 1]
-            return character["Loc"]
-
-
+            y = y - 1
+            key_check(x, y)
+    
     return
+

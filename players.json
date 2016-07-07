@@ -11,7 +11,7 @@
         "Spells": [],
         "Inventory":{"Gold": 5000,
                     "Potion": 5,
-                    "Sewer_Key": 1
+                    "Key": ["Inn_Key", "R_Key"]
         }
     },
 
