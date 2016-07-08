@@ -25,22 +25,18 @@ def command(usr_input):
         
         if command == 'LOOK':
             exits = world_map.Tutorial[x][y]["Exits"]
-            exit_letters = []
-            for i in exits:
-                exit_letters.append(i[0])
-                return
             
             if cmd_opt in exits:  # or cmd_opt in exit_letters
-                if cmd_opt == "N" or cmd_opt == "North":
+                if cmd_opt == "North":
                     #tools.CLEAR_SCREEN()
                     print world_map.Tutorial[x-1][y]["Name"]
-                if cmd_opt == "S" or cmd_opt == "South":
+                if cmd_opt == "South":
                     #tools.CLEAR_SCREEN()
                     print world_map.Tutorial[x+1][y]["Name"]
-                if cmd_opt == "E" or cmd_opt == "East":
+                if cmd_opt == "East":
                     #tools.CLEAR_SCREEN()
                     print world_map.Tutorial[x][y+1]["Name"]
-                if cmd_opt == "W" or cmd_opt == "West":
+                if cmd_opt == "West":
                     #tools.CLEAR_SCREEN()
                     print world_map.Tutorial[x][y-1]["Name"]
                 return
